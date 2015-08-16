@@ -1,0 +1,15 @@
+##### 一. 介绍
+模块是实现特定功能的一组方法。模块化开发有利于代码管理和复用。
+
+##### 二. 模块方案
+![模块化](http://7xl2cu.com1.z0.glb.clouddn.com/2164187276-54d3750ae5873_articlex.png)
+
+##### 三. AMD规范
+AMD即Asynchronous Module Definition(异步模块定义)，它是由RequireJS提出的在浏览器端模块化开发的规范。  
+AMD采用异步方式加载模块，模块的加载不影响它后面语句的执行。所有依赖于这个模块的语句，都定义在一个回调函数中，等到加载完成后，这个回调函数才会执行。
+
+##### 四. CMD规范  
+CMD即Common Module Difinition(通用模块定义)，AMD与CMD最大的不同是，AMD是依赖关系前置，CMD是按需加载。
+
+##### 五. CommonJS规范
+CommonJS是服务器端模块的规范，Node.js采用了这个规范。根据CommonJS规范，一个单独的文件就是一个模块，每个模块都是一个单独的作用域，在该模块中定义的变量，无法被其他模块读取，除非定义为Global对象的属性。
