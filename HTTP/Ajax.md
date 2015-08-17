@@ -1,13 +1,14 @@
 ﻿# Ajax
-##### 一. XMLHttpRequest
+
+### 一. XMLHttpRequest
 * xhr对象用于与服务器交换数据。
 * xhr对象可以在不重新加载页面的情况下更新网页。
 
-##### 二. 创建xhr对象的方法
+### 二. 创建xhr对象的方法
 * 现代浏览器：new XMLHttpRequest();
 * IE5和IE6:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new ActiveXObject("Microsoft.XMLHTTP");
 
-##### 三. 原生Ajax实现方法
+### 三. 原生Ajax实现方法
     function ajax(conf) {
         var type = conf.type;
         var url = conf.url;

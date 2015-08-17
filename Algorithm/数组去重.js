@@ -1,8 +1,6 @@
 //数组去重
 
-var arr = [1,1,0,1,2,3,4,5,6,7,8,4,9,0,2];
-
-//遍历数组，indexOf判断重复项
+//方法一:遍历数组，indexOf判断重复项
 Array.prototype.unique1 = function() {
     var result = [];
     for(var i = 0; i < this.length; i++) {
@@ -12,9 +10,8 @@ Array.prototype.unique1 = function() {
     }
     return result;
 }
-console.log(arr.unique1());
 
-//哈希
+//方法二:哈希
 Array.prototype.unique2 = function() {
     var hash = [];
     var result = [];
@@ -26,9 +23,8 @@ Array.prototype.unique2 = function() {
     }
     return result;
 }
-console.log(arr.unique2());
 
-//排序后判断相邻元素是否重复
+//方法三:排序后判断相邻元素是否重复
 Array.prototype.unique3 = function() {
     this.sort();
     var result = [];
@@ -43,8 +39,7 @@ Array.prototype.unique3 = function() {
 console.log(arr.unique3());
 
 
-//使用Array自带的filter方法
+//方法四:使用Array自带的filter方法
 var result = arr.filter(function(value,index){
     return arr.indexOf(value) === index
 });
-console.log(result);
