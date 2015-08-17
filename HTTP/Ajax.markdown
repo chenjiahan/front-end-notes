@@ -1,5 +1,4 @@
-﻿Tags: HTTP
-# Ajax And Xhr
+﻿# Ajax
 ##### 一. XMLHttpRequest
 * xhr对象用于与服务器交换数据。
 * xhr对象可以在不重新加载页面的情况下更新网页。
