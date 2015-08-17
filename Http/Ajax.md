@@ -7,7 +7,6 @@
 * IE5和IE6:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new ActiveXObject("Microsoft.XMLHTTP");
 
 ##### 三. 原生Ajax实现方法
-
     function ajax(conf) {
         var type = conf.type;
         var url = conf.url;
