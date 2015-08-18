@@ -1,5 +1,4 @@
 //数组去重
-
 //方法一:遍历数组，indexOf判断重复项
 Array.prototype.unique1 = function() {
     var result = [];
@@ -36,8 +35,6 @@ Array.prototype.unique3 = function() {
     }
     return result;
 }
-console.log(arr.unique3());
-
 
 //方法四:使用Array自带的filter方法
 var result = arr.filter(function(value,index){
