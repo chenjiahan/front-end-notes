@@ -46,3 +46,4 @@ this是JavaScript语言的一个关键字，它代表函数运行时，自动生
     o.m.apply();  //0
     o.m.apply(o); //1
     
+    
