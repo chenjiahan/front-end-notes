@@ -17,6 +17,9 @@
     │   ├── CSS选择器.md
     │   └── normalize.md
     │
+    ├── HTML/
+    │   └── script标签.md
+    │
     ├── HTTP/
     │   ├── AJAX.md
     │   ├── 跨域.md
@@ -27,6 +30,7 @@
         ├── 异步编程.md
         ├── 本地存储.md
         ├── 严格模式.md
-        └── 正则表达式.md
+        ├── 正则表达式.md
+        └── this的用法.md
 
 
