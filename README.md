@@ -14,7 +14,8 @@
     │   ├── BFC.md
     │   ├── CSS动画.md
     │   ├── CSS兼容性.md
-    │   └── CSS选择器.md
+    │   ├── CSS选择器.md
+    │   └── normalize.md
     │
     ├── HTTP/
     │   ├── AJAX.md
