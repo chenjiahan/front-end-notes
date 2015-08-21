@@ -27,7 +27,7 @@ removeChild()|移除某个子节点
 cloneNode(boolean)|复制某个节点，传true时复制子节点
 
 ### 三. Document类型
-JavaScript通过Document类型表示文档，在浏览器中，document对象是HTMLDocument的一个实例，表示整个HTML页面。而且，document对象是window对象的一个属性，因此可以将其作为全局对象来访问。  
+JavaScript通过Document类型表示文档，在浏览器中，document对象是HTMLDocument的一个实例，表示整个HTML页面。 
 Document类型的基本属性和方法如下：
 
 属性名（方法）|作用
@@ -41,4 +41,22 @@ referrer|来源页面的URL
 getElementById()|根据ID取得元素
 getElementsByName()|根据name取得NodeList
 getElementsByTagName()|根据tag取得NodeList
+write()|输出流到网页
+writeln()|输出流到网页并添加换行符
+createElement()|创建新元素
 
+### 四. Element类型
+Element类型用于表现XML或HTML元素，提供了对元素标签名、子节点及特性的访问。  
+Element类型的基本属性和方法如下：
+
+属性名（方法）|作用
+---|---
+tagName|标签名（始终大写）
+id|唯一标识符
+title|附加说明信息
+lang|语言代码
+dir|语言方向，ltr或rtl
+class|css类
+getAttribute()|获取某个特性值
+setAttribute()|设置特性名和特性值
+removeAttribute()|彻底移除某个特性值
