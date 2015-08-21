@@ -37,6 +37,7 @@ Array.prototype.unique3 = function() {
 }
 
 //方法四:使用Array自带的filter方法
+var arr = [];
 var result = arr.filter(function(value,index){
     return arr.indexOf(value) === index
 });
