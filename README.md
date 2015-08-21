@@ -26,6 +26,7 @@
     │   └── 状态码.md
     │
     └── JavaScript/
+        ├── 继承.md
         ├── this.md
         ├── 模块化.md
         ├── 异步编程.md
