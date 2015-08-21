@@ -18,9 +18,9 @@
     │   └── normalize.md
     │
     ├── HTML/
-    │   ├── 圣杯布局.md
-    │   ├── 双飞翼布局.md
-    │   └── script标签.md
+    │   ├── script标签.md
+    │   ├── 圣杯布局.html
+    │   └── 双飞翼布局.html
     │
     ├── HTTP/
     │   ├── AJAX.md
@@ -28,6 +28,7 @@
     │   └── 状态码.md
     │
     └── JavaScript/
+        ├── DOM.md
         ├── 继承.md
         ├── this.md
         ├── 模块化.md
