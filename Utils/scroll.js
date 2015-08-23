@@ -21,7 +21,7 @@ function scroll(target, time) {
         target = scrollHeight - clientHeight;
     }
 
-    //定时器滚动
+    //定时器
     var scroll = window.setInterval(function() {
         if ( target == offset ) {
             window.clearInterval( scroll );
