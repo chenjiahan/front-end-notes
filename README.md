@@ -27,19 +27,19 @@
     │   ├── 跨域.md
     │   └── 状态码.md
     │
-    ├── Utils/
-    │   ├── scroll.js
-    │   └── getUrlParam.js
+    ├── JavaScript/
+    │   ├── DOM.md
+    │   ├── 继承.md
+    │   ├── this.md
+    │   ├── 模块化.md
+    │   ├── 异步编程.md
+    │   ├── 事件处理.md
+    │   ├── 本地存储.md
+    │   ├── 严格模式.md
+    │   ├── 创建对象.md
+    │   └── 正则表达式.md
     │
-    └── JavaScript/
-        ├── DOM.md
-        ├── 继承.md
-        ├── this.md
-        ├── 模块化.md
-        ├── 异步编程.md
-        ├── 事件处理.md
-        ├── 本地存储.md
-        ├── 严格模式.md
-        ├── 创建对象.md
-        └── 正则表达式.md
-
+    └── Utils/
+        ├── scroll.js
+        ├── parseHTML.js
+        └── getUrlParam.js
