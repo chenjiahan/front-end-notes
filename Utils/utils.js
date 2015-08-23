@@ -38,7 +38,7 @@ define(['react'],function(React){
 
     //控制滚动条,200ms滚动到指定位置
     function scroll(target) {
-        var speed = Math.abs(window.pageYOffset - target) / 40;
+        var speed = Math.abs(document.body.scrollTop - target) / 40;
         speed = Math.max(5, speed);
         //若目标位置超过底部,则滚动到底部为止
         var clientHeight = document.documentElement.clientHeight;
