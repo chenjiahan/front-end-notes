@@ -6,10 +6,6 @@
 
     front-end-notes/
     │
-    ├── Algorithm/
-    │   ├── 快速排序.js
-    │   └── 数组去重.js
-    │
     ├── CSS/
     │   ├── BFC.md
     │   ├── CSS动画.md
@@ -41,5 +37,7 @@
     │
     └── Utils/
         ├── scroll.js
+        ├── 快速排序.js
+        ├── 数组去重.js
         ├── parseHTML.js
         └── getUrlParam.js
