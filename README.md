@@ -4,7 +4,7 @@
 
 ### 二. 目录
 
-    awesome-front-end/
+    front-end-notes/
     │
     ├── Algorithm/
     │   ├── 快速排序.js
@@ -26,6 +26,9 @@
     │   ├── AJAX.md
     │   ├── 跨域.md
     │   └── 状态码.md
+    │
+    ├── Utils/
+    │   └── getUrlParam.js
     │
     └── JavaScript/
         ├── DOM.md
