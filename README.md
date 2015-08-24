@@ -25,7 +25,7 @@
     │   ├── 状态码.md
     │   └── 访问页面过程.md
     │
-    ├── JavaScript/
+    ├── JS/
     │   ├── DOM.md
     │   ├── 继承.md
     │   ├── this.md
