@@ -20,7 +20,7 @@
     │   └── 双飞翼布局.html
     │
     ├── HTTP/
-    │   ├── AJAX.md
+    │   ├── Ajax.md
     │   ├── 跨域.md
     │   ├── 状态码.md
     │   └── 访问页面过程.md
@@ -40,11 +40,11 @@
     │   └── 正则表达式.md
     │
     └── Utils/
-        ├── scroll.js
-        ├── 快速排序.js
-        ├── 数组去重.js
-        ├── parseHTML.js
-        └── getUrlParam.js
+        ├── scroll.md
+        ├── 快速排序.md
+        ├── 数组去重.md
+        ├── parseHTML.md
+        └── getUrlParam.md
 
 ### 三. 资料
 1. [SegmentFault](http://segmentfault.com/)
