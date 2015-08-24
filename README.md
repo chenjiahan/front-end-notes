@@ -41,3 +41,8 @@
         ├── 数组去重.js
         ├── parseHTML.js
         └── getUrlParam.js
+
+### 三. 资料
+1. [segmentFault](http://segmentfault.com/)
+2. [阮一峰的网络日志](http://www.ruanyifeng.com/blog/)
+3. JavaScript高级程序设计
