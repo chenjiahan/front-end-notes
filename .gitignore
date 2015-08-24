@@ -1,3 +1,7 @@
 # IntelliJ project files
 .idea
 *.iml
+_book
+*.epub
+*.mobi
+*.pdf

@@ -31,7 +31,7 @@
    * [正则表达式](正则表达式.md)
 * Utils
    * [scroll](scroll.js)
-   * 快速排序
+   * [快速排序](快速排序.js)
    * [数组去重](数组去重.js)
    * [parseHTML](parseHTML.js)
    * [getUrlParam](getUrlParam.js)
