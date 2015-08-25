@@ -10,7 +10,7 @@
 * HTML
    * [script标签](HTML/script标签.md)
    * [圣杯布局](HTML/圣杯布局.md)
-   * [双飞翼布局](HTML/双飞翼布局.html)
+   * [双飞翼布局](HTML/双飞翼布局.md)
 * HTTP
    * [Ajax](HTTP/Ajax.md)
    * [跨域](HTTP/跨域.md)
