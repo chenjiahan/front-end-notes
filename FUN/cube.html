@@ -6,7 +6,14 @@
 </head>
 
 <style>
+    html,
+    body {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+    }
     .arena {
+        height: 100%;
         -webkit-perspective: 1000px;
         -webkit-perspective-origin: 50% 50%;
     }
@@ -14,6 +21,9 @@
         position: absolute;
         height: 200px;
         width: 200px;
+        top: 50%;
+        left: 50%;
+        transform: translate3d(-50%,-50%,0);
         -webkit-transition: -webkit-transform 2s linear;
         -webkit-transform-style: preserve-3d;
     }
