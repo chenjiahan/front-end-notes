@@ -11,8 +11,7 @@
         -webkit-perspective-origin: 50% 50%;
     }
     .box {
-        position: relative;
-        margin: 100px auto;
+        position: absolute;
         height: 200px;
         width: 200px;
         -webkit-transition: -webkit-transform 2s linear;
@@ -52,6 +51,7 @@
 
 <script>
     var xAngle = 0, yAngle = 0;
+    var box = document.getElementsByClassName('box')[0];
     document.addEventListener('keydown', function(e){
         switch (e.keyCode) {
             case 65: // left
@@ -67,8 +67,40 @@
                 xAngle -= 90;
                 break;
         };
-        var box = document.getElementsByClassName('box')[0];
         box.style.webkitTransform = "rotateX("+xAngle+"deg) rotateY("+yAngle+"deg)";
     }, false);
+
+    var disX = disY = 0;                         // 鼠标距离div的左距离和上距离
+
+    // 鼠标按下div1时
+    box.onmousedown = function(e) {
+        var evnt = e || event;                  // 得到鼠标事件
+        disX = evnt.clientX - box.offsetLeft;   // 鼠标横坐标 - div1的left
+        disY = evnt.clientY - box.offsetTop;    // 鼠标纵坐标 - div1的top
+
+        // 鼠标移动时
+        document.onmousemove = function(e) {
+            var evnt = e || event;
+            var x = evnt.clientX - disX;
+            var y = evnt.clientY - disY;
+            var window_width  = document.documentElement.clientWidth  - box.offsetWidth;
+            var window_height = document.documentElement.clientHeight - box.offsetHeight;
+
+            x = ( x < 0 ) ? 0 : x;                          // 当div1到窗口最左边时
+            x = ( x > window_width ) ? window_width : x;    // 当div1到窗口最右边时
+            y = ( y < 0 ) ? 0 : y;                          // 当div1到窗口最上边时
+            y = ( y > window_height ) ? window_height : y;  // 当div1到窗口最下边时
+
+            box.style.left = x + "px";
+            box.style.top  = y + "px";
+        };
+
+        document.onmouseup = function() {
+            document.onmousemove =null;
+            document.onmouup = null;
+        };
+        return false;
+    };
+
 </script>
 </html>
