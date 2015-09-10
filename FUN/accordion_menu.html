@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<style>
+    .accordion {
+        width: 200px;
+        overflow: hidden;
+        border-radius: 3px;
+        font-family: monospace;
+    }
+    .accordion,
+    .sub-accordion {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .group,
+    .sub-accordion li {
+        cursor: pointer;
+        color: #f2f2f2;
+        height: 40px;
+        line-height: 40px;
+        padding-left: 15px;
+    }
+    .group,
+    .sub-accordion,
+    .sub-accordion li {
+        -webkit-transition: all .2s ease-in-out;
+            -ms-transition: all .2s ease-in-out;
+                transition: all .2s ease-in-out;
+        -webkit-user-select: none;
+           -moz-user-select: none;
+            -ms-user-select: none;
+                user-select: none;
+    }
+    .group {
+        margin: 0;
+        font-size: 15px;
+        background: #03A9F4;
+    }
+    .group:hover {
+        background: #0399E4;
+    }
+    .sub-accordion {
+        overflow: hidden;
+    }
+    .sub-accordion li {
+        font-size: 14px;
+        background: #0389D4;
+    }
+    .sub-accordion li:hover {
+        background: #0379C4;
+    }
+    .folded {
+        height: 0 !important;
+        overflow: hidden;
+    }
+</style>
+<body>
+    <ul class="accordion">
+        <li>
+            <h5 class="group">Group 1</h5>
+            <ul class="sub-accordion">
+                <li>Item 1</li>
+                <li>Item 2</li>
+                <li>Item 3</li>
+            </ul>
+        </li>
+        <li>
+            <h5 class="group">Group 2</h5>
+            <ul class="sub-accordion folded">
+                <li>Item 1</li>
+                <li>Item 2</li>
+                <li>Item 3</li>
+                <li>Item 4</li>
+                <li>Item 5</li>
+            </ul>
+        </li>
+        <li>
+            <h5 class="group">Group 3</h5>
+            <ul class="sub-accordion folded">
+                <li>Item 1</li>
+                <li>Item 2</li>
+            </ul>
+        </li>
+    </ul>
+</body>
+<script>
+
+    var group = document.getElementsByClassName('group');
+    var sub = document.getElementsByClassName('sub-accordion');
+
+    var handleClick = function (e) {
+        var target = e.target.parentNode.querySelector('.sub-accordion');
+        if (!target.classList.contains('folded')) {
+            target.classList.add('folded');
+        } else {
+            [].forEach.call(sub, function(el) {
+                if (el.parentNode.contains(e.target)) {
+                    el.classList.remove('folded');
+                } else {
+                    el.classList.add('folded');
+                }
+            });
+        }
+    };
+
+    var calcHeight = function(el) {
+        var height = 0;
+        [].forEach.call(el.childNodes, function(c){
+            height += c.offsetHeight || 0;
+        });
+        el.style.height = height + 'px';
+    };
+
+    [].forEach.call(group, function(el) {
+        calcHeight(el.parentNode.querySelector('.sub-accordion'));
+        el.addEventListener('click', handleClick, false);
+    });
+
+</script>
+</html>
