@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flexible Nav</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 2000px;
+        }
+        .flexible-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: #03A9F4;
+            -webkit-transition: all .3s ease-in;
+                -ms-transition: all .3s ease-in;
+                    transition: all .3s ease-in;
+        }
+        .container {
+            width: 1000px;
+            margin: 0 auto;
+        }
+        .nav-left,
+        .nav-right {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .nav-left {
+            float: left;
+        }
+        .nav-right {
+            float: right;
+        }
+        .nav-left li,
+        .nav-right li {
+            float: left;
+            width: 100px;
+        }
+        .nav-left li > a,
+        .nav-right li > a {
+            display: block;
+            color: #fff;
+            line-height: 80px;
+            text-align: center;
+            text-decoration: none;
+            -webkit-transition: background .15s ease-in-out, line-height .3s ease-in;
+                -ms-transition: background .15s ease-in-out, line-height .3s ease-in;
+                    transition: background .15s ease-in-out, line-height .3s ease-in;
+        }
+        .nav-left li > a:hover,
+        .nav-right li > a:hover {
+            background: #0399E4;
+        }
+        .shrunken-nav {
+            height: 60px;
+            -webkit-box-shadow: 0 2px 10px rgba(0,0,0,.2);
+                    box-shadow: 0 2px 10px rgba(0,0,0,.2);
+        }
+        .shrunken-nav .nav-left li > a,
+        .shrunken-nav .nav-right li > a {
+            line-height: 60px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="flexible-nav">
+        <div class="container">
+            <ul class="nav-left">
+                <li><a href="#">Page 1</a></li>
+                <li><a href="#">Page 2</a></li>
+                <li><a href="#">Page 3</a></li>
+                <li><a href="#">Page 4</a></li>
+            </ul>
+            <ul class="nav-right">
+                <li><a href="#">Page 5</a></li>
+                <li><a href="#">Page 6</a></li>
+                <li><a href="#">Page 7</a></li>
+            </ul>
+        </div>
+    </nav>
+</body>
+<script>
+
+    var nav = document.getElementsByClassName('flexible-nav')[0];
+
+    var handleScroll = function() {
+        if (window.scrollY > 30 && !nav.classList.contains('shrunken-nav')) {
+            nav.classList.add('shrunken-nav');
+        } else if (window.scrollY <= 30 && nav.classList.contains('shrunken-nav')) {
+            nav.classList.remove('shrunken-nav');
+        }
+    };
+
+    window.addEventListener('scroll', handleScroll, false);
+</script>
+</html>
