@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,maximum-scale=1"/>
     <title>Album</title>
     <style>
-        html {
+        * {
             box-sizing: border-box;
+            -webkit-box-sizing: border-box;
         }
         body {
             margin: 0;
@@ -23,11 +25,18 @@
         }
         .thumb {
             cursor: pointer;
-            width: 228px;
-            height: 171px;
+            width: 230px;
+            height: 173px;
             margin: 10px;
             border-radius: 2px;
             border: 1px solid rgba(255,255,255,.6);
+        }
+        @media (max-width: 1000px) {
+            .thumb {
+                width: 46%;
+                height: auto;
+                margin: 10px 2%;
+            }
         }
         .gallery {
             display: none;
@@ -39,13 +48,17 @@
             overflow: hidden;
             background: rgba(0, 0, 0, .8);
         }
+        .gallery:focus {
+            border: none;
+            outline: none;
+        }
         .slider {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            transition: all .4s ease-in-out;
+            transition: all .4s ease;
         }
         .photo-box {
             position: relative;
@@ -65,7 +78,6 @@
             user-select: none;
             -webkit-user-select: none;
         }
-
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -76,6 +88,20 @@
         }
         .fadeIn {
             animation: fadeIn .4s ease-in-out both;
+        }
+
+        @keyframes popup {
+            from {
+                opacity: 0;
+                transform: translate3d(0, 10px, 0);
+            }
+            to {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .popup {
+            animation: popup .5s both;
         }
 
         .arrow-left,
@@ -104,7 +130,7 @@
         .pagination {
             position: absolute;
             top: 15px;
-            left: 10px;
+            left: 15px;
             color: #fafafa;
             font-size: 13px;
         }
@@ -112,10 +138,11 @@
         .close-btn {
             position: absolute;
             cursor: pointer;
-            top: 20px;
-            right: 20px;
-            width: 20px;
-            height: 20px;
+            top: 15px;
+            right: 15px;
+            width: 30px;
+            height: 30px;
+            opacity: .8;
         }
         .close-btn:before,
         .close-btn:after {
@@ -141,7 +168,7 @@
 </head>
 <body>
     <div class="container"></div>
-    <div class="gallery fadeIn">
+    <div class="gallery fadeIn" tabindex="-1">
         <div class="pagination"></div>
         <div class="arrow-left"></div>
         <div class="slider"></div>
@@ -150,87 +177,152 @@
     </div>
 </body>
 <script>
+    (function() {
+        var container = document.getElementsByClassName('container')[0];
+        var gallery = document.getElementsByClassName('gallery')[0];
+        var slider = document.getElementsByClassName('slider')[0];
+        var arrowLeft = document.getElementsByClassName('arrow-left')[0];
+        var arrowRight = document.getElementsByClassName('arrow-right')[0];
+        var pagination = document.getElementsByClassName('pagination')[0];
+        var closeBtn = document.getElementsByClassName('close-btn')[0];
+        var PHOTO_NUM = 40;
+        var currentPos = 1;
 
-    var container = document.getElementsByClassName('container')[0];
-    var gallery = document.getElementsByClassName('gallery')[0];
-    var slider = document.getElementsByClassName('slider')[0];
-    var arrowLeft = document.getElementsByClassName('arrow-left')[0];
-    var arrowRight = document.getElementsByClassName('arrow-right')[0];
-    var pagination = document.getElementsByClassName('pagination')[0];
-    var closeBtn = document.getElementsByClassName('close-btn')[0];
-    var PHOTO_NUM = 40;
-    var currentPos = 1;
+        function initImage() {
+            var thumbs = '';
+            var images = '';
+            var cdn = 'http://7xlp8u.com1.z0.glb.clouddn.com/thumb_';
+            var crop = '?imageView2/1/w/400/h/300/q/75';
+            var windowWidth = window.innerWidth;
 
-    function initImage() {
-        var thumbs = '';
-        var images = '';
-        var cdn = 'http://7xlp8u.com1.z0.glb.clouddn.com/thumb_';
-        var crop = '?imageView2/1/w/400/h/300/q/75';
-        var windowWidth = window.innerWidth;
+            for(var i = 1; i <= PHOTO_NUM; i++) {
+                thumbs += '<img src="' + cdn + i + '.jpg' + crop + '" class="thumb popup" style="animation-delay:' + i * 30 + 'ms" data-id="' + i + '" />';
+                images += '<div class="photo-box" data-id="' + i + '" style="width:' + windowWidth + 'px">' +
+                        '<img src="' + cdn + i + '.jpg" class="photo"/></div>';
+            }
 
-        for(var i = 1; i <= PHOTO_NUM; i++) {
-            thumbs += '<img src="' + cdn + i + '.jpg' + crop + '" class="thumb" data-id="' + i + '" />';
-            images += '<div class="photo-box" data-id="' + i + '" style="width:' + windowWidth + 'px">' +
-                      '<img src="' + cdn + i + '.jpg" class="photo"/></div>';
+            container.innerHTML = thumbs;
+            slider.innerHTML = images;
+            slider.style.width = windowWidth * PHOTO_NUM + 'px';
         }
 
-        container.innerHTML = thumbs;
-        slider.innerHTML = images;
-        slider.style.width = windowWidth * (PHOTO_NUM + 2) + 'px';
-    }
+        function turnToPhoto(target) {
+            target = parseInt(target);
 
-    function turnToPhoto(target) {
-        target = parseInt(target);
-        var windowWidth = window.innerWidth;
+            if(target > PHOTO_NUM || target < 1) {
+                return;
+            }
 
-        if (target === PHOTO_NUM) {
-            arrowRight.style.display = 'none';
-        } else if (target === 1) {
-            arrowLeft.style.display = 'none';
-        } else if (target === PHOTO_NUM - 1 && currentPos === PHOTO_NUM) {
-           arrowRight.style.display = 'block';
-        } else if (target === 2 && currentPos === 1) {
-            arrowLeft.style.display = 'block';
+            //arrow toggle
+            if (target === PHOTO_NUM) {
+                arrowRight.style.display = 'none';
+            } else if (target === 1) {
+                arrowLeft.style.display = 'none';
+            } else if (arrowLeft.style.display === 'none') {
+                arrowLeft.style.display = 'block';
+            } else if (arrowRight.style.display === 'none') {
+                arrowRight.style.display = 'block';
+            }
+
+            var windowWidth = window.innerWidth;
+            currentPos = target;
+            var offsetX = - (currentPos - 1) * windowWidth;
+            slider.style.transform = 'translate3d(' + offsetX + 'px, 0, 0)';
+
+            pagination.innerHTML = currentPos + ' / ' + PHOTO_NUM;
         }
 
-        currentPos = target;
-        var offsetX = - (currentPos - 1) * windowWidth;
-        slider.style.transform = 'translate3d(' + offsetX + 'px, 0, 0)';
+        function handleThumbClick(e) {
+            turnToPhoto(e.target.dataset.id);
+            gallery.style.display = 'block';
+            gallery.focus();
+            document.body.style.overflow = 'hidden';
+        }
 
-        pagination.innerHTML = currentPos + ' / ' + PHOTO_NUM;
-    }
+        function onClose() {
+            gallery.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
 
-    function handleThumbClick(e) {
-        turnToPhoto(e.target.dataset.id);
-        gallery.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-    }
+        function doHandleResize() {
+            var photoBox = document.getElementsByClassName('photo-box');
+            var windowWidth = window.innerWidth;
+            var offsetX = - (currentPos - 1) * windowWidth;
+            slider.style.width = windowWidth * PHOTO_NUM + 'px';
+            slider.style.transform = 'translate3d(' + offsetX + 'px, 0, 0)';
+            [].forEach.call(photoBox, function(el) {
+                el.style.width = windowWidth + 'px';
+            });
+        }
 
-    function onClose() {
-        gallery.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
+        //throttle
+        var resizeTimeoutId;
+        function handleResize() {
+            clearTimeout(resizeTimeoutId);
+            resizeTimeoutId = setTimeout(doHandleResize, 500);
+        }
 
-    function initEvent() {
-        //click thumb
-        var thumbs = document.getElementsByClassName('thumb');
-        [].forEach.call(thumbs, function(el) {
-            el.addEventListener('click', handleThumbClick, false);
-        });
+        function handleKeyDown(e) {
+            switch (e.keyCode) {
+                case 37: //left
+                case 38: //up
+                    turnToPhoto(currentPos - 1);
+                    break;
+                case 32: //space
+                case 39: //right
+                case 40: //down
+                    turnToPhoto(currentPos + 1);
+                    break;
+                case 27: //esc
+                    onClose();
+                    break;
+            }
+        }
 
-        //click arrow
-        arrowLeft.addEventListener('click', function() {
-            turnToPhoto(currentPos - 1);
-        }, false);
-        arrowRight.addEventListener('click', function() {
-            turnToPhoto(currentPos + 1);
-        }, false);
+        function doHandleMouseWheel(e) {
+            var dir = (e.wheelDelta ? e.wheelDelta : - e.detail) > 0 ? -1 : 1;
+            turnToPhoto(currentPos + dir);
+        }
 
-        closeBtn.addEventListener('click', onClose, false);
-    }
+        var mouseWheelTimeoutId;
+        function handleMouseWheel(e) {
+            clearTimeout(mouseWheelTimeoutId);
+            mouseWheelTimeoutId = setTimeout(function() {
+                doHandleMouseWheel(e);
+            }, 50);
+        }
 
-    initImage();
-    initEvent();
+        function initEvent() {
+            //click thumb
+            var thumbs = document.getElementsByClassName('thumb');
+            [].forEach.call(thumbs, function(el) {
+                el.addEventListener('click', handleThumbClick, false);
+            });
 
+            //click arrow
+            arrowLeft.addEventListener('click', function() {
+                turnToPhoto(currentPos - 1);
+            }, false);
+            arrowRight.addEventListener('click', function() {
+                turnToPhoto(currentPos + 1);
+            }, false);
+
+            //close btn
+            closeBtn.addEventListener('click', onClose, false);
+
+            //resize
+            window.addEventListener('resize', handleResize, false);
+
+            //key down
+            gallery.addEventListener('keydown', handleKeyDown, false);
+
+            //mouse wheel
+            gallery.addEventListener('mousewheel', handleMouseWheel, false);
+            gallery.addEventListener('DOMMouseScroll', handleMouseWheel, false);
+        }
+
+        initImage();
+        initEvent();
+    })();
 </script>
 </html>
