@@ -101,7 +101,7 @@
             }
         }
         .popup {
-            animation: popup .5s both;
+            animation: popup .5s both ease-in-out;
         }
 
         .arrow-left,
@@ -113,6 +113,7 @@
             height: 30px;
             z-index: 999;
             margin-top: -15px;
+            opacity: .7;
             transition: all .2s ease-in-out;
         }
         .arrow-left:hover,
@@ -142,7 +143,7 @@
             right: 15px;
             width: 30px;
             height: 30px;
-            opacity: .8;
+            opacity: .7;
         }
         .close-btn:before,
         .close-btn:after {
@@ -166,6 +167,7 @@
 
     </style>
 </head>
+
 <body>
     <div class="container"></div>
     <div class="gallery fadeIn" tabindex="-1">
@@ -176,6 +178,7 @@
         <div class="close-btn"></div>
     </div>
 </body>
+
 <script>
     (function() {
         var container = document.getElementsByClassName('container')[0];
@@ -292,11 +295,21 @@
             }, 50);
         }
 
+        function handlePhotoClick(e) {
+            e.target.classList.add('zoom');
+        }
+
         function initEvent() {
             //click thumb
             var thumbs = document.getElementsByClassName('thumb');
             [].forEach.call(thumbs, function(el) {
                 el.addEventListener('click', handleThumbClick, false);
+            });
+
+            //click photo
+            var photo = document.getElementsByClassName('photo');
+            [].forEach.call(photo, function(el) {
+                el.addEventListener('click', handlePhotoClick, false);
             });
 
             //click arrow
