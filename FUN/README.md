@@ -5,3 +5,4 @@
 * accordion menu 手风琴菜单
 * react logo React框架的Logo,SVG格式
 * flexible nav 弹性顶部导航条
+* album 相册

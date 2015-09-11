@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Album</title>
+    <style>
+        html {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            padding: 50px 0;
+            background: #03A9F4;
+        }
+        .container {
+            width: 1000px;
+            margin: 0 auto;
+        }
+        @media (max-width: 1000px) {
+            .container {
+                width: 100%;
+            }
+        }
+        .thumb {
+            cursor: pointer;
+            width: 228px;
+            height: 171px;
+            margin: 10px;
+            border-radius: 2px;
+            border: 1px solid rgba(255,255,255,.6);
+        }
+        .gallery {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: rgba(0, 0, 0, .8);
+        }
+        .slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transition: all .4s ease-in-out;
+        }
+        .photo-box {
+            position: relative;
+            float: left;
+            width: 100%;
+            height: 100%;
+            transition: all .2s ease;
+        }
+        .photo {
+            position: absolute;
+            max-width: 80%;
+            max-height: 90%;
+            top: 50%;
+            left: 50%;
+            transform: translate3d(-50%, -50%, 0);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, .3);
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        .fadeIn {
+            animation: fadeIn .4s ease-in-out both;
+        }
+
+        .arrow-left,
+        .arrow-right {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: 17px;
+            height: 30px;
+            z-index: 999;
+            margin-top: -15px;
+            transition: all .2s ease-in-out;
+        }
+        .arrow-left:hover,
+        .arrow-right:hover {
+            transform: scale3d(1.3, 1.3, 1);
+        }
+        .arrow-left {
+            left: 20px;
+            background: url(http://7xlp8u.com1.z0.glb.clouddn.com/arrows.png) no-repeat left top;
+        }
+        .arrow-right {
+            right: 20px;
+            background: url(http://7xlp8u.com1.z0.glb.clouddn.com/arrows.png) no-repeat left bottom;
+        }
+        .pagination {
+            position: absolute;
+            top: 15px;
+            left: 10px;
+            color: #fafafa;
+            font-size: 13px;
+        }
+
+        .close-btn {
+            position: absolute;
+            cursor: pointer;
+            top: 20px;
+            right: 20px;
+            width: 20px;
+            height: 20px;
+        }
+        .close-btn:before,
+        .close-btn:after {
+            position: absolute;
+            content: '';
+            height: 2px;
+            width: 100%;
+            top: 50%;
+            left: 0;
+            margin-top: -1px;
+            background: #fafafa;
+            border-radius: 100%;
+            transition: all .2s ease;
+        }
+        .close-btn:before {
+            transform: rotate(45deg);
+        }
+        .close-btn:after {
+            transform: rotate(-45deg);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container"></div>
+    <div class="gallery fadeIn">
+        <div class="pagination"></div>
+        <div class="arrow-left"></div>
+        <div class="slider"></div>
+        <div class="arrow-right"></div>
+        <div class="close-btn"></div>
+    </div>
+</body>
+<script>
+
+    var container = document.getElementsByClassName('container')[0];
+    var gallery = document.getElementsByClassName('gallery')[0];
+    var slider = document.getElementsByClassName('slider')[0];
+    var arrowLeft = document.getElementsByClassName('arrow-left')[0];
+    var arrowRight = document.getElementsByClassName('arrow-right')[0];
+    var pagination = document.getElementsByClassName('pagination')[0];
+    var closeBtn = document.getElementsByClassName('close-btn')[0];
+    var PHOTO_NUM = 40;
+    var currentPos = 1;
+
+    function initImage() {
+        var thumbs = '';
+        var images = '';
+        var cdn = 'http://7xlp8u.com1.z0.glb.clouddn.com/thumb_';
+        var crop = '?imageView2/1/w/400/h/300/q/75';
+        var windowWidth = window.innerWidth;
+
+        for(var i = 1; i <= PHOTO_NUM; i++) {
+            thumbs += '<img src="' + cdn + i + '.jpg' + crop + '" class="thumb" data-id="' + i + '" />';
+            images += '<div class="photo-box" data-id="' + i + '" style="width:' + windowWidth + 'px">' +
+                      '<img src="' + cdn + i + '.jpg" class="photo"/></div>';
+        }
+
+        container.innerHTML = thumbs;
+        slider.innerHTML = images;
+        slider.style.width = windowWidth * (PHOTO_NUM + 2) + 'px';
+    }
+
+    function turnToPhoto(target) {
+        target = parseInt(target);
+        var windowWidth = window.innerWidth;
+
+        if (target === PHOTO_NUM) {
+            arrowRight.style.display = 'none';
+        } else if (target === 1) {
+            arrowLeft.style.display = 'none';
+        } else if (target === PHOTO_NUM - 1 && currentPos === PHOTO_NUM) {
+           arrowRight.style.display = 'block';
+        } else if (target === 2 && currentPos === 1) {
+            arrowLeft.style.display = 'block';
+        }
+
+        currentPos = target;
+        var offsetX = - (currentPos - 1) * windowWidth;
+        slider.style.transform = 'translate3d(' + offsetX + 'px, 0, 0)';
+
+        pagination.innerHTML = currentPos + ' / ' + PHOTO_NUM;
+    }
+
+    function handleThumbClick(e) {
+        turnToPhoto(e.target.dataset.id);
+        gallery.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function onClose() {
+        gallery.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+
+    function initEvent() {
+        //click thumb
+        var thumbs = document.getElementsByClassName('thumb');
+        [].forEach.call(thumbs, function(el) {
+            el.addEventListener('click', handleThumbClick, false);
+        });
+
+        //click arrow
+        arrowLeft.addEventListener('click', function() {
+            turnToPhoto(currentPos - 1);
+        }, false);
+        arrowRight.addEventListener('click', function() {
+            turnToPhoto(currentPos + 1);
+        }, false);
+
+        closeBtn.addEventListener('click', onClose, false);
+    }
+
+    initImage();
+    initEvent();
+
+</script>
+</html>
