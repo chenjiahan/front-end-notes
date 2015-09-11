@@ -295,21 +295,11 @@
             }, 50);
         }
 
-        function handlePhotoClick(e) {
-            e.target.classList.add('zoom');
-        }
-
         function initEvent() {
             //click thumb
             var thumbs = document.getElementsByClassName('thumb');
             [].forEach.call(thumbs, function(el) {
                 el.addEventListener('click', handleThumbClick, false);
-            });
-
-            //click photo
-            var photo = document.getElementsByClassName('photo');
-            [].forEach.call(photo, function(el) {
-                el.addEventListener('click', handlePhotoClick, false);
             });
 
             //click arrow
