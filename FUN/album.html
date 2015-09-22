@@ -179,6 +179,7 @@
     </div>
 </body>
 
+<script src="lazyload.js"></script>
 <script>
     (function() {
         var container = document.getElementsByClassName('container')[0];
@@ -188,7 +189,7 @@
         var arrowRight = document.getElementsByClassName('arrow-right')[0];
         var pagination = document.getElementsByClassName('pagination')[0];
         var closeBtn = document.getElementsByClassName('close-btn')[0];
-        var PHOTO_NUM = 20;
+        var PHOTO_NUM = 40;
         var currentPos = 1;
 
         function initImage() {
@@ -199,7 +200,7 @@
             var windowWidth = window.innerWidth;
 
             for(var i = 1; i <= PHOTO_NUM; i++) {
-                thumbs += '<img src="' + cdn + i + '.jpg' + crop + '" class="thumb popup" style="animation-delay:' + i * 30 + 'ms" data-id="' + i + '" />';
+                thumbs += '<img data-src="' + cdn + i + '.jpg' + crop + '" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" onload="lzld(this)" class="thumb popup" style="animation-delay:' + i * 30 + 'ms" data-id="' + i + '" />';
                 images += '<div class="photo-box" data-id="' + i + '" style="width:' + windowWidth + 'px">' +
                         '<img src="' + cdn + i + '.jpg" class="photo"/></div>';
             }
